@@ -71,7 +71,7 @@
         let brickOffsetTop;
         let brickOffsetLeft;
 
-        brickRowCount = Row1;
+        brickRowCount = Row1;           
         brickColumnCount = Column1;
         brickWidth = Width1;
         brickHeight = Height1;
@@ -121,13 +121,14 @@
                             if (score === brickRowCount * brickColumnCount && level === 1) {
                                 score = 0;
                                 level = 2;
-                                brickRowCount = Row2;
-                                brickColumnCount = Column2;
-                                brickWidth = Width2;
-                                brickHeight = Height2;
-                                brickPadding = Padding2;
-                                brickOffsetTop = OffsetTop2;
-                                brickOffsetLeft = OffsetLeft2;
+                                checkLevel();
+                                // brickRowCount = Row2;
+                                // brickColumnCount = Column2;
+                                // brickWidth = Width2;
+                                // brickHeight = Height2;
+                                // brickPadding = Padding2;
+                                // brickOffsetTop = OffsetTop2;
+                                // brickOffsetLeft = OffsetLeft2;
                                 resetBricks();
 
                             } else if (score === brickRowCount * brickColumnCount && level === 2) {
