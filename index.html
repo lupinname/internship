@@ -44,25 +44,66 @@
 
         let interval = 0;
 
-        const brickRowCount = 3;
-        const brickColumnCount = 5;
-        const brickWidth = 75;
-        const brickHeight = 20;
-        const brickPadding = 10;
-        const brickOffsetTop = 30;
-        const brickOffsetLeft = 30;
+        //lv1
+        const Row1 = 3;
+        const Column1 = 5;
+        const Width1 = 75;
+        const Height1 = 20;
+        const Padding1 = 10;
+        const OffsetTop1 = 30;
+        const OffsetLeft1 = 30;
 
+        //lv2
+        const Row2 = 2;
+        const Column2 = 3;
+        const Width2 = 55;
+        const Height2 = 20;
+        const Padding2 = 90;
+        const OffsetTop2 = 30;
+        const OffsetLeft2 = 80;
+
+        //setup status padding
+        let brickRowCount;
+        let brickColumnCount;
+        let brickWidth;
+        let brickHeight;
+        let brickPadding;
+        let brickOffsetTop;
+        let brickOffsetLeft;
+
+        brickRowCount = Row1;
+        brickColumnCount = Column1;
+        brickWidth = Width1;
+        brickHeight = Height1;
+        brickPadding = Padding1;
+        brickOffsetTop = OffsetTop1;
+        brickOffsetLeft = OffsetLeft1;
+
+        let level = 1;
         let score = 0;
-
         let lives = 3;
-
         let bricks = [];
-        for (let c = 0; c < brickColumnCount; c++) {
-            bricks[c] = [];
-            for (let r = 0; r < brickRowCount; r++) {
-                bricks[c][r] = { x: 0, y: 0, status: 1 };
+        resetBricks();
+
+        function setLv(Row, Column, Width, Height, Padding, OffsetTop, OffsetLeft) {
+            brickRowCount = Row;
+            brickColumnCount = Column;
+            brickWidth = Width;
+            brickHeight = Height;
+            brickPadding = Padding;
+            brickOffsetTop = OffsetTop;
+            brickOffsetLeft = OffsetLeft;
+        }
+
+        function resetBricks() {
+            for (let c = 0; c < brickColumnCount; c++) {
+                bricks[c] = [];
+                for (let r = 0; r < brickRowCount; r++) {
+                    bricks[c][r] = { x: 0, y: 0, status: 1 };
+                }
             }
         }
+
         function collisionDetection() {
             for (let c = 0; c < brickColumnCount; c++) {
                 for (let r = 0; r < brickRowCount; r++) {
@@ -77,10 +118,21 @@
                             dy = -dy;
                             b.status = 0;
                             score++;
-                            if (score === brickRowCount * brickColumnCount) {
+                            if (score === brickRowCount * brickColumnCount && level === 1) {
+                                score = 0;
+                                level = 2;
+                                brickRowCount = Row2;
+                                brickColumnCount = Column2;
+                                brickWidth = Width2;
+                                brickHeight = Height2;
+                                brickPadding = Padding2;
+                                brickOffsetTop = OffsetTop2;
+                                brickOffsetLeft = OffsetLeft2;
+                                resetBricks();
+
+                            } else if (score === brickRowCount * brickColumnCount && level === 2) {
                                 alert("YOU WIN, CONGRATULATIONS!");
                                 document.location.reload();
-                                clearInterval(interval);
                             }
                         }
                     }
@@ -92,6 +144,11 @@
             ctx.font = "16px Arial";
             ctx.fillStyle = "#0095DD";
             ctx.fillText(`Score: ${score}`, 8, 20);
+        }
+        function drawLevel() {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText(`Level: ${level}`, canvas.width / 2 - 20, 20);
         }
 
         function drawLives() {
@@ -117,6 +174,7 @@
         }
 
         function drawBricks() {
+            // checkLevel();
             for (let c = 0; c < brickColumnCount; c++) {
                 for (let r = 0; r < brickRowCount; r++) {
                     if (bricks[c][r].status === 1) {
@@ -134,12 +192,24 @@
             }
         }
 
+        function checkLevel() {
+            switch (level) {
+                case 1:
+                    setLv(Row1, Column1, Width1, Height1, Padding1, OffsetTop1, OffsetLeft1);
+                    break;
+                case 2:
+                    setLv(Row2, Column2, Width2, Height2, Padding2, OffsetTop2, OffsetLeft2);
+            }
+        }
+
         function draw() {
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
             drawBall();
             drawPaddle();
             drawScore();
+            drawLevel();
             drawLives();
             drawBricks();
             collisionDetection();
@@ -163,7 +233,6 @@
                     if (!lives) {
                         alert("GAME OVER");
                         document.location.reload();
-                        clearInterval(interval); // Needed for Chrome to end game
                     } else {
                         x = canvas.width / 2;
                         y = canvas.height - 30;
@@ -176,10 +245,12 @@
 
             x += dx;
             y += dy;
+
+            requestAnimationFrame(draw);
         }
 
         function startGame() {
-            interval = setInterval(draw, 10);
+            draw();
 
             document.addEventListener("keydown", keyDownHandler, false);
             document.addEventListener("keyup", keyUpHandler, false);
