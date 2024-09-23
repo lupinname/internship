@@ -24,7 +24,7 @@ class GameWorld {
 
     createWorld() {
         this.gameObjects = [
-            new Square(this.context, 250, 50, 20, 100, 1),
+            new Square(this.context, 250, 50, 0, 100, 1),
 
             //error
             new Circle(this.context, 250, 300, 0, -50, 200),
@@ -103,6 +103,15 @@ class GameWorld {
 
         return true;
     }
+    // rectIntersect(x1, y1, r1, x2, y2, r2) {
+
+    //     // Calculate the distance between the two circles
+    //     let squareDistance = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2);
+    
+    //     // When the distance is smaller or equal to the sum
+    //     // of the two radius, the circles touch or overlap
+    //     return squareDistance <= ((r1 + r2) * (r1 + r2))
+    // }
 
     clearCanvas() {
         // Clear the canvas
