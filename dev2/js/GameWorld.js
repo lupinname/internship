@@ -27,7 +27,7 @@ class GameWorld {
             new Square(this.context, 250, 50, 20, 100, 1),
 
             //error
-            // new Circle(this.context, 250, 300, 0, -50, 200),
+            new Circle(this.context, 250, 300, 0, -50, 200),
         ];
     }
 

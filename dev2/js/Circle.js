@@ -14,7 +14,7 @@ class Circle extends GameObject {
         this.radius = 10;
 
         // Supply the sprite. Only load it once and reuse it
-        loadImage();
+        this.loadImage();
     }
 
     loadImage() {
@@ -31,7 +31,7 @@ class Circle extends GameObject {
             };
 
             // Start loading the image
-            Circle.sprite.src = '/img/sprite_animation.png';
+            Circle.sprite.src = "../../img/sprite_animation.png";
         }
         // Circle.sprite = new Image();
         // Circle.sprite.src = '/img/sprite1.png';
@@ -56,7 +56,7 @@ class Circle extends GameObject {
         this.context.translate(-this.x, -this.y);
 
         // Draw the image, rotated
-        this.context.drawImage(Circle.image, this.column * Circle.frameWidth, this.row * Circle.frameHeight, Circle.frameWidth, Circle.frameHeight, (this.x - this.radius), (this.y - this.radius) - this.radius * 0.4, this.radius * 2, this.radius * 2.42);
+        this.context.drawImage(Circle.sprite, this.column * Circle.frameWidth, this.row * Circle.frameHeight, Circle.frameWidth, Circle.frameHeight, (this.x - this.radius), (this.y - this.radius) - this.radius * 0.4, this.radius * 2, this.radius * 2.42);
 
         // Reset transformation matrix
         this.context.setTransform(1, 0, 0, 1, 0, 0);
