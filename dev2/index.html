@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>HTML5 Game</title>
+    <meta name="description" content="A basic HTML5 game">
+    <meta name="author" content="[Your name]">
+
+    <script type="text/javascript" src="js/GameWorld.js"></script>
+    <script type="text/javascript" src="js/GameObject.js"></script>
+    <script type="text/javascript" src="js/Square.js"></script>
+    <script type="text/javascript" src="js/Circle.js"></script>
+    <!-- <img id="myImage" src="/img/sprite1.png"> -->
+
+
+</head>
+
+<body>
+
+    <canvas id="canvas" width="750" height="400" style="border:1px solid lightgrey;"></canvas>
+
+    <script>
+        
+        window.onload = function () {
+            let gameWorld = new GameWorld('canvas');
+        }
+    </script>
+</body>
+
+</html>
