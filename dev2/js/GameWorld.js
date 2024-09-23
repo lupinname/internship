@@ -25,6 +25,8 @@ class GameWorld {
     createWorld() {
         this.gameObjects = [
             new Square(this.context, 250, 50, 20, 100, 1),
+
+            //error
             // new Circle(this.context, 250, 300, 0, -50, 200),
         ];
     }
