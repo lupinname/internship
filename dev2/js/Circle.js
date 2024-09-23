@@ -57,6 +57,9 @@ class Circle extends GameObject {
 
         // Draw the image, rotated
         this.context.drawImage(Circle.sprite, this.column * Circle.frameWidth, this.row * Circle.frameHeight, Circle.frameWidth, Circle.frameHeight, (this.x - this.radius), (this.y - this.radius) - this.radius * 0.4, this.radius * 2, this.radius * 2.42);
+        this.context.beginPath();
+        this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        this.context.fill();
 
         // Reset transformation matrix
         this.context.setTransform(1, 0, 0, 1, 0, 0);
